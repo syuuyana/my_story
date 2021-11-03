@@ -1,0 +1,82 @@
+img {
+    width:100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.card-deck {
+    margin-top: 80px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.card-title {
+    text-align: center;
+}
+
+h4 {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 30px 0 30px;
+}
+
+.detail {
+    text-align: center;
+}
+
+input[type="submit"] {
+    height: 50px;
+    width: 200px;
+    border-radius: 150px;
+}
+
+#red {
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    background: #f1dcd8;
+    color: #000;
+    cursor: pointer;
+}
+#red:hover {
+    border: 2px solid rgb(240, 148, 148);
+    background: #FFF;
+    color: #000;
+}
+
+#blue {
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    background: #d8e4f1;
+    color: #000;
+    cursor: pointer;
+}
+#blue:hover {
+    border: 2px solid rgb(94, 158, 241);
+    background: #FFF;
+    color: #000;
+}
+
+#yellow {
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    background: #f3e597;
+    color: #000;
+    cursor: pointer;
+}
+#yellow:hover {
+    border: 2px solid rgb(235, 223, 122);
+    background: #FFF;
+    color: #000;
+}
+
+#green {
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    background: #bcebaa;
+    color: #000;
+    cursor: pointer;
+}
+#green:hover {
+    border: 2px solid rgb(87, 177, 107);
+    background: #FFF;
+    color: #000;
+}

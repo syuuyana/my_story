@@ -1,0 +1,75 @@
+<!-- layout.htmlがベース -->
+{% extends 'layout.html' %}
+
+    <!-- css -->
+    {% block css %}<link rel="stylesheet" href="../static/contents.css">{% endblock css %}
+    
+    <!-- title -->
+    {% block page %} company {% endblock page %}
+    
+    <!-- main -->
+    {% block main %}
+    <div class="main_contents">
+
+        <!-- Movie -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3"> <!-- 横幅は3:6:3で調節 -->
+
+                    <!-- YouTube -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HrvaL6Kz4Eg" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 動画説明 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">　<!-- 横幅は1:10:1で調節 -->
+                    <div class="alert alert-primary" role="alert"> <!-- 色は青色で調整 -->
+                        <div class="strong">
+                            <strong>プライオール</strong>
+                        </div>
+                        <br>
+                        　福岡に在住しております、弥永と申します。よろしくお願いします。
+                        <br>
+                        　私は今回、個人製作の一つとして、ホームページを作成いたしましたので、ご紹介させていただきたいと思います。
+                        <br>
+                        　作ったのは、「プライオール」という架空の会社のサイトになります。
+                        <br>
+                        　なぜ会社のサイトを作りたいと思ったのかといいますと、ホームページは、会社にとっての「顔」であり、そんな会社のサイトの構成、しくみってどうなっているのか、と就職活動をしている際に大変興味を持ったからです。
+                        <br>
+                        　では、早速機能紹介に移らさせていただいきます。
+                        <br>
+                        　今回は、HTML, CSS, JavaScriptに加えてbootstrapを使っております。これによってスマホ対応のレスポンシブデザインに仕上がっています。
+                        <br>
+    　                    まず、一番上には、ナビバーがあります。その内、右3つのボタンは、それぞれ別のページにハイパーリンクで飛べるようになっています。また、ホームに戻ってくる際には、JSのアラート機能によって、出迎えの挨拶が表示されます。さらに、画面を小さくしますと、撮影の都合上表示はできないのですが、ハイドボタンがでてきて、ナビバーのボタンを隠すことができます。
+                        <br>
+                        　次にタイトルですが、ここで1つこだわったところとしてはHTMLのspan要素を用いて、遊び心がある色使いに仕上げたことです。そうすれば、普段使うホームページとはまた違った特徴が生まれると思ったので、このようなテイストにしてみました。
+                        <br>
+                        　次は、このカーソルインジゲーターですが、この2枚の写真は実家のある大分の城下町の一角を撮ったものになります。仕組みとしては、この矢印のボタンを押せば、次の写真に移動できるようになっています。
+                        <br>
+                        　さらに、その下の事業説明の欄ですが、イメージ画像を背景にして各事業の説明を書いてみました。今回、フレームワークにBootstrapを使っているのですが、このようなテキストボックスも最初から用意されていて、フレームワークの使い勝手の良さを感じました。
+                        <br>
+                        　最後にSNS連携ですが、各ボタンを押すとYouTube、Twitter、Instagramの各SNSに飛べるようにしました。作りながら、この一つ一つのアイコンにも、細かく決まった配色の指定があることを知り、ホームページ作成の大変さを知るいい機会となりました。
+                        <br>
+                        　作った感想といたしましては、大きく分けて２つあり、一つはやはりBootstrapなどのフレームワークは、想像以上に便利で、他のフレームワークについても学んでみたいな、と思ったこと。もう一つは、普段我々が使っている会社のサイトには、異なった背景を持った訪問者に対しても、使い勝手の良いサイト構成になるように設計されていることを知り、とても勉強になったことです。次回はもう少し、バックエンドの要素も取り入れた作品を作ってみたいな、と思います。
+                        <br>
+                        　以上で、私の説明は以上になります。ご清聴ありがとうございました。
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+
+    <!-- 戻るボタン -->
+    <div class="back">
+        <button id="blue" onclick="location.href='/'">ホームに戻る</button>
+    </div>
+
+    {% endblock main %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+    {% block css %}<link rel="stylesheet" href="../static/management.css">{% endblock css %}
+    
+    {% block page %}管理画面{% endblock page %}
+    
+    {% block main %}
+    <h2>現在の利用状況</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">名前</th>
+                <th scope="col">ログイン回数</th>
+                <th scope="col">電話番号</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in alldata %}
+            <tr>
+                <th scope="row">{{ data[0] }}</th>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[5] }}</td>
+                <td>{{ data[3] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    {% endblock main %}
+
+<!-- colspan="2" -->

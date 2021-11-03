@@ -1,0 +1,38 @@
+# 複数のコンテナを繋ぐyamlファイル
+version: '3.8' #docker version
+services: # アプリケーションを動かすための各要素
+  database: # 名前はなんでもよい(1個1個がコンテナ)
+    # image: mysql:latest
+    build: ./mysql/ # ComposeFileを実行し、ビルドされるときのpath(docker buildコマンドを実行した場所)
+    volumes: # マウントする設定ファイルのパスを指定(mysqlの設定など)
+      - ./mysql/sqls/:/docker-entrypoint-initdb.d/ # /docker-entrypoint-initdb.d」にマウントしたディレクトリに「.sql」「.sh」「.sql.gz」という拡張子でファイルを配置しておくと、MySQLイメージからコンテナを生成・起動する時に、それらのファイルを読み込み実行してくれます。コロンの由来はわかりません。
+    ports: # DBのDockerImageを立ち上げる際のポート番号
+      - 3306:3306
+    environment: # DBについての環境変数設定(パスワードなど)。コンテナに渡す。
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app # この変数はオプションで、イメージの起動時に作成するデータベースの名前を指定します。
+      MYSQL_ROOT_HOST: '%' # この環境変数はオプションです。設定されていると、そのホストからrootユーザーとしてMySQLサーバーにアクセスすることができるようになります。この状態だと％誰でもフィットします。
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    networks: # 各コンテナを繋ぐためのネットワーク名
+      - app_network
+  appserver:
+    build: # Dockerfile(自分の好きなようにカスタマイズしたDockerImageをコマンド1行で作成できるようになります)
+      context: ./src/
+    ports:
+      - 5000:5000
+    volumes: # ホスト側でマウントするパスを指定する場合は、「ホストマシンのフォルダパス:コンテナのフォルダパス」の形式で指定する
+      - ./src/app:/app
+    environment:
+      TZ: Asia/Tokyo
+      Flask_APP: app.py # 後のcommandのため
+      FLASK_ENV: development # コード変更時のリロードやデバッグ情報を参照できる
+    command: flask run -h 0.0.0.0 
+    tty: true # コンテナが動き続ける
+    depends_on: # mysqlから先に動かす
+      - database
+    networks:
+      - app_network
+
+networks: # 各コンテナを繋ぐためのネットワークの設定
+  app_network: # ネットワーク名はapp_network
+    driver: bridge

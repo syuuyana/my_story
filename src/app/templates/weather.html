@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>北九州の天気</title>
+    <link rel="stylesheet" href="../static/weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav>
+        <p>{{ date_info.year }}年{{ date_info.month }}月{{ date_info.day }}日 {{ date_info.hour }}時{{ date_info.minute }}分現在</p>
+    </nav>
+
+    <!-- ヘッダー -->
+    <header>
+        <h1>　〜今日の北九州の天気〜　</h1>
+    </header>
+ 
+    <!-- メインコンテンツ -->
+    <main>
+        <div class="weather_main">
+            {% if weather == 'Clouds' %}
+                <img src="http://3.bp.blogspot.com/-Kas7dqv2tBk/UNbgdBVs_wI/AAAAAAAAJPU/GGxpD21ZpjM/s1600/mark_tenki_kumori.png">
+            {% elif weather == 'Clear' %}
+                <img src="http://3.bp.blogspot.com/-93EsFuhpCKo/UNbgb6ZaNHI/AAAAAAAAJPE/ZIVJ0VqJSRM/s1600/mark_tenki_hare.png">
+            {% elif weather == 'Rain' %}
+                <img src="http://3.bp.blogspot.com/-a148-_9uwxU/UNbgiw9khuI/AAAAAAAAJP4/c5FPmhaSKhc/s1600/mark_tenki_umbrella.png">
+            {% endif %}
+        </div>
+        <div class="number">
+            <div class="number_child">
+                <h4><span class="green">降水確率</span></h4>
+                <h2><span class="green">{{ rain }}%</span></h2>
+            </div>
+            <div class="number_child">
+                <h4><span class="red">最高気温</span></h4>
+                <h2><span class="red">{{ max_temp }}°C</span></h2>
+            </div>
+            <div class="number_child" id="blue">
+                <h4><span class="blue">最低気温</span></h4>
+                <h2><span class="blue">{{ min_temp }}°C</span></h2>
+            </div>
+        </div>
+    </main>
+ 
+    <!-- フッター -->
+    <footer>
+        <button onclick="reload()"><i class="fas fa-5x fa-power-off"></i></button>
+    </footer>
+
+    <div class="back">
+        <button id="yellow" class="yellow_back" onclick="location.href='/'">Homeへ</button>
+    </div>
+
+    <script>
+        function reload() {
+            document.location.reload();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!-- layout.htmlがベース -->
+{% extends 'layout.html' %}
+
+    <!-- css -->
+    {% block css %}<link rel="stylesheet" href="../static/index.css">{% endblock css %}
+
+    <!-- title -->
+    {% block page %}ホーム{% endblock page %}
+    
+    <!-- main -->
+    {% block main %}
+
+    <form action="/login/" method="post">
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-xl-5">
+                    <div class="card-deck">
+
+                        <!-- 冷蔵庫(RMA) -->
+                        <div class="card border-danger">
+                            <div class="card-body">
+                                <img src="../static/images/refrigerator.jpeg" class="private_app">
+                                <h4 class="card-title">RMA</h4>
+                                <p class="card-text">このアプリは、自炊をよくしている自分が、冷蔵庫の食材をよく傷ましていたので、賞味期限の切迫をお知らせしてくれるアプリを作成してみました。</p>
+                                <div class="detail">
+                                    <input id="red" type="submit" name="refrigerator" value="詳しくはこちら">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-5">
+                    <div class="card-deck">
+
+                        <!-- プライオール  -->
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <img src="../static/images/big_tower.jpeg" class="private_app">
+                                <h4 class="card-title"> プライオール </h4>
+                                <p class="card-text">このアプリは、就職活動をしていた自分が、様々な会社のホームページを見ていた時、ホームページの構成についてふと興味を持ったので作成してみました。</p>
+                                <div class="detail">
+                                    <input id="blue" type="submit" name="company" value="詳しくはこちら">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-xl-5">
+                    <div class="card-deck">
+
+                        <!-- 北九州の天気 -->
+                        <div class="card border-warning">
+                            <div class="card-body">
+                                <img src="../static/images/weather.jpeg" class="private_app">
+                                <h4 class="card-title"> 北九州の天気 </h4>
+                                <p class="card-text">このアプリは、普段朝に弱い自分が、天気情報の必要な部分だけ手軽に見れるお天気アプリが欲しいと思っていたので、作成してみました。(デモあり)</p>
+                                <div class="detail">
+                                    <input id="yellow" type="submit" name="weather" value="詳しくはこちら">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-5">
+                    <div class="card-deck">
+
+                        <!-- 管理者専用サイト -->
+                        <div class="card border-success">
+                            <div class="card-body">
+                                <img src="../static/images/management.jpeg"  class="private_app">
+                                <h4 class="card-title"> 管理者用サイト </h4>
+                                <p class="card-text">このサイトは、My Storyを閲覧しているユーザーの方の情報を閲覧できます。<br>　(一般の方は閲覧ができません。ご了承ください。)</p>
+                                <div class="detail">
+                                    <input id="green" type="submit" name="management" value="管理画面へ">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+    {% endblock main %}

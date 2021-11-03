@@ -1,0 +1,75 @@
+<!-- layout.htmlがベース -->
+{% extends 'layout.html' %}
+
+    <!-- css -->
+    {% block css %}<link rel="stylesheet" href="../static/contents.css">{% endblock css %}
+    
+    <!-- title -->
+    {% block page %} RMA {% endblock page %}
+    
+    <!-- main -->
+    {% block main %}
+    <div class="main_contents">
+
+        <!-- Movie -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3"> <!-- 横幅は3:6:3で調節 -->
+
+                    <!-- YouTube -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HrvaL6Kz4Eg" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 動画説明 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1"> <!-- 横幅は1:10:1で調節 -->
+                    <div class="alert alert-danger" role="alert"> <!-- 色は赤色で調整 -->
+                        <div class="strong">
+                            <strong>Refrigerator Management App</strong>
+                        </div>
+                        <br>
+                        　現在福岡県に在住しておりますしゅうと申します。宜しくお願いいたします。今回は、私が作成しました冷蔵庫管理アプリ「RMA」を紹介させていただきたいと思います。
+                        <br>
+                        　まず、なぜこのようなアプリケーションを作ったのかと言いますと、私は現在一人暮らしをしておりまして、冷蔵庫の中に入れていた食材を傷ますことが多かったので、消費期限の切迫をお知らせしてくれるアプリがあればいいなと普段感じていたからです。
+                        <br>
+                        　では、アプリの機能紹介に移ります。
+                        <br>
+                        　まず、ホーム画面はこのような感じになっています。こだわったところといたしましては、このタイトルのフォントや野菜の絵柄など、誰でも使いやすいシンプルなデザインにこだわりました。
+                        <br>
+                        　次に、6種類の野菜の中から保存する野菜を1つ選択しますと、下に選択した野菜の名前が表示されるようになっています。また、日付もセレクトボタンから一つ選択します。
+                        <br>
+                        　全ての操作が終わり登録ボタンを押すと、各野菜の登録画面が表示されるようになっています。
+                        <br>
+                        　また、野菜は3件まで登録が可能になっていて、「2件目登録」のボタンを押すと、2つめの野菜の登録が可能になっています。試しに3件まで登録して見ます。
+                        <br>
+                        　このように、お気づきの方も多いとは思いますが、1件目はベージュ、2件目はグレー、3件目はブルーの配色にするなど、ユーザーから見て見やすい色使いにもこだわりました。
+                        <br>
+                        　ここで、カウント開始を選択すると、カウントダウンが始まります。今回は説明の都合上、一秒ごとのカウントダウンにさせていただいております。
+                        <br>
+                        　カウントが0秒になりますと、アラート機能を用いて、ユーザーに消費期限の経過をお知らせする仕組みになっています。
+                        <br>
+                        　ここで、仮に登録フォームで何も選択しなかった状態で登録ボタンを押しますと、このように泣いているパンダのキャラクターが、入力に誤りがあったことをお知らせしてくれます。
+                        <br>
+                        　戻るボタンで戻り、今度は野菜のみを選択した状態で「登録」ボタンを押しますと、再びパンダが日付の指定をし忘れていることをエラーメッセージを変えてお知らせしてくれます。ここで一つこだわったこととしては、たとえエラーメッセ－ジであっても、このパンダのような楽しめるイラストであることにこだわりました。
+                        <br>
+                        　これで、アプリの機能説明のほうは以上になります。
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+
+    <!-- 戻るボタン -->
+    <div class="back">
+        <button id="red" onclick="location.href='/'">ホームに戻る</button>
+    </div>
+
+    {% endblock main %}
