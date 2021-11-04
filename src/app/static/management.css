@@ -11,3 +11,27 @@ h2 {
 table {
     margin: 80px;
 }
+
+.green_back {
+    height: 50px;
+    width: 200px;
+    border-radius: 150px;
+    margin-top: 30px;
+}
+.back {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#green {
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    background: #bcebaa;
+    color: #000;
+    cursor: pointer;
+}
+#green:hover {
+    border: 2px solid rgb(87, 177, 107);
+    background: #FFF;
+    color: #000;
+}
