@@ -4,8 +4,6 @@ from datetime import timedelta  # ログイン時間制限用
 import mysql.connector  # MySQLとFlaskのコネクター
 import re  # 文字数制限
 import requests  # weather情報取得
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 # Flaskのインスタンス生成

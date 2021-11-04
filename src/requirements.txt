@@ -3,3 +3,5 @@ requests
 mysql-connector-python
 numpy
 matplotlib
+mysqlclient
+SQLAlchemy

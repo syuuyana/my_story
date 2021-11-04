@@ -10,7 +10,10 @@ CREATE TABLE IF NOT EXISTS Profiles(
   password varchar(20) NOT NULL,
   tel varchar(20) NOT NULL,
   name varchar(20) NOT NULL,
-  times int DEFAULT 0
+  times int DEFAULT 0,
+  times_ref int DEFAULT 0,
+  times_pri int DEFAULT 0,
+  times_wea int DEFAULT 0
 );
 
 
