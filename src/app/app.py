@@ -14,6 +14,9 @@ app = Flask(__name__)
 # secret_keyの準備
 app.config['SECRET_KEY'] = 'fh7342ttl284c'
 
+# security code
+SECURE = '456545'
+
 
 # MySQLとFlaskのコネクタ設定
 def cdb():
@@ -87,11 +90,7 @@ def login():
         if account:
             app.permanent_session_lifetime = timedelta(minutes=3)  # 3分ログイン状態保持  
             session.permanent = True # 仮にブラウザを閉じても状態保持
-#            session.modified = True
-#            email = request.form['email']
-#            session['email'] = email
-#            session['log_in'] = True # ログインが正常に行われた
-#            session['user_id'] = account[0] # idをセッションに代入
+            session.modified = True # session変更をブラウザに登録しない
             return redirect('/if_contents')  # どの紹介ページを選択したかで表示変更
         else:
             msg = 'incorrect username or password'  # エラー表示
@@ -108,21 +107,62 @@ def login():
             session['contents'] = 'management'  # 管理者ページの選択保持
         else:
             session['contents'] = None  # 何の選択も保持しない
-        return render_template("login.html")  # ログインページ遷移
 
-
-"""
-@app.route('/refrigerator', methods=['GET', 'POST'])
-def main():
-
-        # データベースに情報を挿入
-        db = cdb()
-        cursor = db.cursor(buffered=True)
-        cursor.execute("INSERT INTO Profiles (email, password) values (%s, %s)", (email, password,))
-        return render_template("condition.html", condition='成功！')
+        if session['contents'] == 'management':
+            return redirect('/login_management')  # ログインページ遷移(management)
         else:
-            return render_template("condition.html", condition='もう一回！')
-"""
+            return render_template("login.html")  # ログインページ遷移(normal)
+
+
+# 管理者用ログイン処理
+@app.route('/login_management', methods=['GET', 'POST'])
+def login_management():
+
+    msg = ""
+    times_now = 0  # ログイン回数格納 
+
+    # ログイン情報は安全か、フォームに情報は記入されているか(情報入力後)
+    if request.method == 'POST' \
+        and 'email' in request.form \
+        and 'password' in request.form \
+        and 'security' in request.form:
+        
+        # ログイン情報をPOSTで受け取る
+        email = request.form['email']
+        password = request.form['password']
+        security = request.form['security']
+
+        # セキュリティコードを確認
+        if security != SECURE:
+            msg = 'security code is incorrect !'  # エラー表示
+            return render_template("login.html", msg=msg)  # 再度ログイン
+        
+        # ログイン情報は、データベースの情報と一致するか確認
+        cnx = cdb()
+        cursor = cnx.cursor(buffered=True)  # 一件ずつデータを取る仕組みの構築
+        cursor.execute('SELECT * FROM Profiles WHERE email=%s AND password=%s', 
+                        (email, password,))  # メールアドレスとパスワードは一致しているか、過去に登録したことがあるか
+        account = cursor.fetchone()  # 実際にrecord取得(一件ずつ)してタプル化
+
+        # 本人確認が正しいときの処理
+        if account:
+            app.permanent_session_lifetime = timedelta(minutes=3)  # 3分ログイン状態保持  
+            session.permanent = True # 仮にブラウザを閉じても状態保持
+            session.modified = True # session変更をブラウザに登録しない
+
+            # ログイン回数更新
+            times_now = account[5]
+            times_now += 1
+            cursor.execute("UPDATE Profiles set times=%s where email=%s AND password=%s", (times_now, email, password,))
+            cnx.commit()
+        
+            return redirect('/if_contents')  # どの紹介ページを選択したかで表示変更
+        else:
+            msg = 'incorrect username or password'  # エラー表示
+            return render_template("login_management.html", msg=msg)  # 再度ログイン
+
+    else: # ログイン画面を開いたばかりで、何も入力していない(情報入力前)
+        return render_template("login_management.html")  # ログインページ遷移
 
 
 # 登録時の処理
@@ -143,16 +183,12 @@ def register():
         tel = request.form['tel']
         name = request.form['name']
 
-#        if (nickname is None) or (password is None) or (email is None):
-#            pass
-#        else:
-
         # 文字数制限()
         if register_interface("password", password, 8) == False:
             msg = 'A-Z, a-z, 0-9をそれぞれ１字以上を含め、合計8文字以上で入力してください'
             return render_template('register.html', msg=msg)
         if register_interface("name", name, 1) == False:
-            msg = 'ニックネームは1文字以上で入力してください'
+            msg = 'ネームは1文字以上で入力してください'
             return render_template('register.html', msg=msg)
 
         # 一度登録しているかどうか確認
@@ -181,10 +217,7 @@ def register():
 
             app.permanent_session_lifetime = timedelta(minutes=3)
             session.permanent = True
-#            session.modified = True
-#            session['user'] = nickname
-#            session['loggedin'] = True
-#            session['user_id'] = account_new[0]
+            session.modified = True # session変更をブラウザに登録しない
 
             return redirect('/if_contents')  # 押されたボタンに対して画面変える
     else: # まだ登録を済ませていない(登録前)

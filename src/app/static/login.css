@@ -22,6 +22,11 @@ button {
     color: red;
 }
 
+.err {
+    text-align: center;
+    color: red;
+}
+
 .login_reminder {
     text-align: center;
     margin-top: .5em;
