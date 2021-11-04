@@ -60,7 +60,10 @@ def top():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     msg = ""
-    times_now = 0  # ログイン回数格納 
+    times_now = 0  # 全体のログイン回数格納
+    times_ref = 0  # ログイン回数格納(RMA)
+    times_pri = 0  # ログイン回数格納(プライオール)
+    times_wea = 0  # ログイン回数格納(天気)
 
     # ログイン情報は安全か、フォームに情報は記入されているか(情報入力後)
     if request.method == 'POST' \
@@ -77,18 +80,48 @@ def login():
         cursor.execute('SELECT * FROM Profiles WHERE email=%s AND password=%s', 
                         (email, password,))  # メールアドレスとパスワードは一致しているか、過去に登録したことがあるか
         account = cursor.fetchone()  # 実際にrecord取得(一件ずつ)してタプル化
-
-        # ログイン回数更新
-        times_now = account[5]
-        times_now += 1
-        cursor.execute("UPDATE Profiles set times=%s where email=%s AND password=%s", (times_now, email, password,))
-        cnx.commit()
         
         # 本人確認が正しいときの処理
         if account:
             app.permanent_session_lifetime = timedelta(minutes=3)  # 3分ログイン状態保持  
             session.permanent = True # 仮にブラウザを閉じても状態保持
             session.modified = True # session変更をブラウザに登録しない
+
+            # 全体のログイン回数更新
+            times_now = account[5]
+            times_now += 1
+            cnx = cdb()
+            cursor = cnx.cursor(buffered=True)  # 一件ずつデータを取る仕組みの構築
+            cursor.execute("UPDATE Profiles set times=%s where email=%s AND password=%s", (times_now, email, password,))
+            cnx.commit()
+
+            # ログイン回数更新(RMA)
+            if session['contents'] == 'refrigerator':
+                times_ref = account[6]
+                times_ref += 1
+                cnx = cdb()
+                cursor = cnx.cursor(buffered=True)  # 一件ずつデータを取る仕組みの構築
+                cursor.execute("UPDATE Profiles set times_ref=%s where email=%s AND password=%s", (times_ref, email, password,))
+                cnx.commit()
+
+            # ログイン回数更新(プライオール)
+            if session['contents'] == 'company':
+                times_pri = account[7]
+                times_pri += 1
+                cnx = cdb()
+                cursor = cnx.cursor(buffered=True)  # 一件ずつデータを取る仕組みの構築
+                cursor.execute("UPDATE Profiles set times_pri=%s where email=%s AND password=%s", (times_pri, email, password,))
+                cnx.commit()
+
+            # ログイン回数更新(天気)
+            if session['contents'] == 'weather':
+                times_wea = account[8]
+                times_wea += 1
+                cnx = cdb()
+                cursor = cnx.cursor(buffered=True)  # 一件ずつデータを取る仕組みの構築
+                cursor.execute("UPDATE Profiles set times_wea=%s where email=%s AND password=%s", (times_wea, email, password,))
+                cnx.commit()
+
             return redirect('/if_contents')  # どの紹介ページを選択したかで表示変更
         else:
             msg = 'incorrect username or password'  # エラー表示
@@ -117,7 +150,7 @@ def login():
 def login_management():
 
     msg = ""
-    times_now = 0  # ログイン回数格納 
+    times_now = 0  # ログイン回数格納(全体)
 
     # ログイン情報は安全か、フォームに情報は記入されているか(情報入力後)
     if request.method == 'POST' \
@@ -133,7 +166,7 @@ def login_management():
         # セキュリティコードを確認
         if security != SECURE:
             msg = 'security code is incorrect !'  # エラー表示
-            return render_template("login.html", msg=msg)  # 再度ログイン
+            return render_template("login_management.html", msg=msg)  # 再度ログイン
         
         # ログイン情報は、データベースの情報と一致するか確認
         cnx = cdb()
@@ -148,7 +181,7 @@ def login_management():
             session.permanent = True # 仮にブラウザを閉じても状態保持
             session.modified = True # session変更をブラウザに登録しない
 
-            # ログイン回数更新
+            # ログイン回数更新(全体)
             times_now = account[5]
             times_now += 1
             cursor.execute("UPDATE Profiles set times=%s where email=%s AND password=%s", (times_now, email, password,))
@@ -213,9 +246,11 @@ def register():
                         (email, password, tel, name))
             account_new = cursor.fetchone()
 
-            app.permanent_session_lifetime = timedelta(minutes=3)
-            session.permanent = True
-            session.modified = True # session変更をブラウザに登録しない
+            # ログイン時と同様
+            if account_new:
+                app.permanent_session_lifetime = timedelta(minutes=3)
+                session.permanent = True
+                session.modified = True # session変更をブラウザに登録しない
 
             return redirect('/if_contents')  # 押されたボタンに対して画面変える
     else: # まだ登録を済ませていない(登録前)
@@ -257,6 +292,7 @@ def weather():
     json_data2 = requests.get(url).json()
     rain = json_data2[0]['timeSeries'][1]['areas'][1]['pops'][0]
 
+    # 天気情報を表示
     return render_template("weather.html", weather=weather, max_temp=max_temp, min_temp=min_temp, 
             rain=rain, date_info=date_info)
 
@@ -271,6 +307,7 @@ def management():
     alldata = cursor.execute('SELECT * FROM Profiles')
     alldata = cursor.fetchall()
 
+    # データベースの情報を表示
     return render_template("management.html", alldata=alldata)
 
 

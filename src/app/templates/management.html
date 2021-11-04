@@ -15,85 +15,85 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">名前</th>
-                <th scope="col">ログイン回数(全体)</th>
-                <th scope="col">電話番号</th>
+                <th class="table-success" scope="col">No.</th>
+                <th class="table-success" scope="col">名前</th>
+                <th class="table-success" scope="col">ログイン回数(全体)</th>
+                <th class="table-success" scope="col">電話番号</th>
             </tr>
         </thead>
         <tbody>
         {% for data in alldata %}
             <tr>
-                <th scope="row">{{ data[0] }}</th>
-                <td>{{ data[4] }}</td>
-                <td>{{ data[5] }}</td>
-                <td>{{ data[3] }}</td>
+                <th class="table-success" scope="row">{{ data[0] }}</th>
+                <td class="table-success">{{ data[4] }}</td>
+                <td class="table-success">{{ data[5] }}</td>
+                <td class="table-success">{{ data[3] }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <!-- 全体のログイン回数 -->
+    <!-- RMAのログイン回数 -->
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">名前</th>
-                <th scope="col">ログイン回数(全体)</th>
-                <th scope="col">電話番号</th>
+                <th class="table-danger" scope="col">No.</th>
+                <th class="table-danger" scope="col">名前</th>
+                <th class="table-danger" scope="col">ログイン回数(RMA)</th>
+                <th class="table-danger" scope="col">電話番号</th>
             </tr>
         </thead>
         <tbody>
         {% for data in alldata %}
             <tr>
-                <th scope="row">{{ data[0] }}</th>
-                <td>{{ data[4] }}</td>
-                <td>{{ data[5] }}</td>
-                <td>{{ data[3] }}</td>
+                <th class="table-danger" scope="row">{{ data[0] }}</th>
+                <td class="table-danger">{{ data[4] }}</td>
+                <td class="table-danger">{{ data[6] }}</td>
+                <td class="table-danger">{{ data[3] }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <!-- 全体のログイン回数 -->
+    <!-- プライオールのログイン回数 -->
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">名前</th>
-                <th scope="col">ログイン回数(全体)</th>
-                <th scope="col">電話番号</th>
+                <th class="table-primary" scope="col">No.</th>
+                <th class="table-primary" scope="col">名前</th>
+                <th class="table-primary" scope="col">ログイン回数(会社)</th>
+                <th class="table-primary" scope="col">電話番号</th>
             </tr>
         </thead>
         <tbody>
         {% for data in alldata %}
             <tr>
-                <th scope="row">{{ data[0] }}</th>
-                <td>{{ data[4] }}</td>
-                <td>{{ data[5] }}</td>
-                <td>{{ data[3] }}</td>
+                <th class="table-primary" scope="row">{{ data[0] }}</th>
+                <td class="table-primary">{{ data[4] }}</td>
+                <td class="table-primary">{{ data[7] }}</td>
+                <td class="table-primary">{{ data[3] }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <!-- 全体のログイン回数 -->
+    <!-- 天気アプリのログイン回数 -->
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">名前</th>
-                <th scope="col">ログイン回数(全体)</th>
-                <th scope="col">電話番号</th>
+                <th class="table-warning" scope="col">No.</th>
+                <th class="table-warning" scope="col">名前</th>
+                <th class="table-warning" scope="col">ログイン回数(天気)</th>
+                <th class="table-warning" scope="col">電話番号</th>
             </tr>
         </thead>
         <tbody>
         {% for data in alldata %}
             <tr>
-                <th scope="row">{{ data[0] }}</th>
-                <td>{{ data[4] }}</td>
-                <td>{{ data[5] }}</td>
-                <td>{{ data[3] }}</td>
+                <th class="table-warning" scope="row">{{ data[0] }}</th>
+                <td class="table-warning">{{ data[4] }}</td>
+                <td class="table-warning">{{ data[8] }}</td>
+                <td class="table-warning">{{ data[3] }}</td>
             </tr>
         {% endfor %}
         </tbody>
