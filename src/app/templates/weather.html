@@ -1,13 +1,23 @@
+<!-- 天気は、layout用いず -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+
+    <!-- title -->
     <title>北九州の天気</title>
+
+    <!-- weather.css -->
     <link rel="stylesheet" href="../static/weather.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ログインなので、layout用いず -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" 
+                                integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+                                crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
+    <!-- 現在時刻 -->
     <nav>
         <p>{{ date_info.year }}年{{ date_info.month }}月{{ date_info.day }}日 {{ date_info.hour }}時{{ date_info.minute }}分現在</p>
     </nav>

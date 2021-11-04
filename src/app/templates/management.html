@@ -1,11 +1,17 @@
+<!-- layout.htmlがベース -->
 {% extends 'layout.html' %}
 
+    <!-- css -->
     {% block css %}<link rel="stylesheet" href="../static/management.css">{% endblock css %}
     
+    <!-- title -->
     {% block page %}管理画面{% endblock page %}
     
+    <!-- main -->
     {% block main %}
     <h2>現在の利用状況</h2>
+
+    <!-- 全体のログイン情報 -->
     <table class="table">
         <thead>
             <tr>
