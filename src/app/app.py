@@ -9,6 +9,7 @@ import requests  # weather情報取得
 # Flaskのインスタンス生成
 app = Flask(__name__)
 
+
 # secret_keyの準備
 app.config['SECRET_KEY'] = 'fh7342ttl284c'
 
